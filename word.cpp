@@ -1,0 +1,1 @@
+// Class responsible for processing the word values of the log file.

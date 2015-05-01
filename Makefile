@@ -2,28 +2,28 @@ default: main.exe
 
 #----------------Complie main.cpp-----------------------------
 main.o: main.cpp convert.h parse.h command.h word.h 
-	g++ -c main.cpp 
+	g++ -std=c++11 -c main.cpp 
 #------------------------------------------------------------
 
 #---------------Compile command.cpp---------------------------
 command.o: command.cpp command.h
-	   g++ -c command.cpp 
+	   g++ -std=c++11 -c command.cpp 
 #-------------------------------------------------------------
 
 #------------------Compile convert.cpp----------------------------
 convert.o: convert.cpp convert.h
-	   g++ -c convert.cpp  
+	   g++ -std=c++11 -c convert.cpp  
 #----------------------------------------------------------------  
 
 
 #-------------------Compile parse.cpp-----------------------------
 parse.o: parse.cpp 
-	 g++ -c parse.cpp
+	 g++ -std=c++11 -c parse.cpp
 #-----------------------------------------------------------------
 
 #--------------------Compile word.cpp------------------------------
 word.o: word.cpp convert.h word.h
-	g++ -c word.cpp
+	g++ -std=c++11 -c word.cpp
 #------------------------------------------------------------------
 
 #--------------link object files to executables--------------------

@@ -39,7 +39,7 @@ void Command::set_values(int line_num, string name, string kind, string num)
   //clears hexa for reusage
   hexa.clear();
   hexa.str(string());
-  //add string hex and num to hexa
+  //convert num from string to hex
   hexa << hex << num;
   //read num_words from hexa
   hexa >> num_words;

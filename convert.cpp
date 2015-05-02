@@ -46,7 +46,7 @@ int hex_to_dec(string s) {
 }
 
 int bit_shift(string data, int hiBound, int loBound) {
-    int hexNum = std::strtol(data, NULL, 16);;
+    int hexNum = hex_to_dec(data);
     int bitShift;
     int final;
     int bitMask = pow(2, hiBound - loBound) - 1;

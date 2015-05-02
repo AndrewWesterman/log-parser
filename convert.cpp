@@ -49,7 +49,7 @@ int bit_shift(string data, int hiBound, int loBound) {
     int hexNum = hex_to_dec(data);
     int bitShift;
     int final;
-    int bitMask = pow(2, hiBound - loBound) - 1;
+    int bitMask = pow(2, (hiBound - loBound + 1)) - 1;
 
     bitShift = hexNum >> loBound;
 

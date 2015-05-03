@@ -50,14 +50,6 @@ int main(int argc, char** argv)
     exit(2);
   }
   
-  ofstream outFile;
-  outFile.open("test.txt");
-  if ( ! outFile.is_open()) {
-    cerr << "Cannot create an output file."<<endl;
-    exit(2);
-  }
-  //outFile.close();
-  //outFile.open("test.txt", ios::app);
 
   /* Create two objects of class Data_Info to get useful data from input file */
   Data_Info Command_Info;
@@ -195,7 +187,7 @@ int main(int argc, char** argv)
 	if ( order == true ) {
 	  for ( int i = 0; i < num_words; i++) {
 	    if (list_word[i].get_field_name().compare("") != 0) {
-	      list_word[i].print(outFile);
+	      list_word[i].print();
 	    }
 	  }
 	  outFile<<endl;
@@ -205,7 +197,7 @@ int main(int argc, char** argv)
 	else {
 	  for ( int i = num_words - 1; i >= 0; i--) {
 	    if (list_word[i].get_field_name().compare("") != 0) {
-	      list_word[i].print(outFile);
+	      list_word[i].print();
 	    }
 	  }
 	  outFile<<endl;
@@ -296,7 +288,7 @@ int main(int argc, char** argv)
 	if ( order == true ) {
 	  for ( int i = 0; i < num_words; i++) {
 	    if (list_word[i].get_field_name().compare("") != 0) {
-	      list_word[i].print(outFile);
+	      list_word[i].print();
 	    }
 	  }
 	  outFile<<endl;
@@ -304,7 +296,7 @@ int main(int argc, char** argv)
 	else {
 	  for ( int i = num_words - 1; i >= 0; i--) {
 	    if (list_word[i].get_field_name().compare("") != 0) {
-	      list_word[i].print(outFile);
+	      list_word[i].print();
 	    }
 	  }
 	  outFile<<endl;
@@ -317,8 +309,7 @@ int main(int argc, char** argv)
 
   inFile.close();
 
-  RelTime.print(outFile);
-  outFile.close();
+  RelTime.print();
   	
   delete [] list_word;
   delete command;

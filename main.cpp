@@ -52,6 +52,10 @@ int main(int argc, char** argv)
   
   /* open results.log to write log */
   ofstream fout("results.log");
+  if ( ! fout.is_open()) {
+    cerr << "Cannot open the output file."<<endl;
+    exit(3);
+  }
 
   /* Create two objects of class Data_Info to get useful data from input file */
   Data_Info Command_Info;
@@ -311,7 +315,8 @@ int main(int argc, char** argv)
 
   inFile.close();
 
-  //RelTime.print(outFile);
+  RelTime.print(fout);
+  fout.close();
   	
   delete [] list_word;
   delete command;

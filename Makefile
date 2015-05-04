@@ -39,8 +39,10 @@ word.o: word.cpp convert.h word.h
 #--------------link object files to executables-----------------------------------
 main.exe: main.o parse.o command.o word.o rate.o time.o convert.o
 	  g++ main.o parse.o command.o word.o rate.o time.o convert.o -o main.exe
-#---------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
-
+#--------------Clean object files and main.exe-----------------------------------
+clean: 
+	rm *.o *~ main.exe
 
 

@@ -189,7 +189,7 @@ int main(int argc, char** argv)
 	if ( order == true ) {
 	  for ( int i = 0; i < num_words; i++) {
 	    if (list_word[i].get_field_name().compare("") != 0) {
-	      list_word[i].print();
+	      list_word[i].print(fout);
 	    }
 	  }
 	  fout<<endl;
@@ -199,7 +199,7 @@ int main(int argc, char** argv)
 	else {
 	  for ( int i = num_words - 1; i >= 0; i--) {
 	    if (list_word[i].get_field_name().compare("") != 0) {
-	      list_word[i].print();
+	      list_word[i].print(fout);
 	    }
 	  }
 	  fout<<endl;
@@ -290,7 +290,7 @@ int main(int argc, char** argv)
 	if ( order == true ) {
 	  for ( int i = 0; i < num_words; i++) {
 	    if (list_word[i].get_field_name().compare("") != 0) {
-	      list_word[i].print();
+	      list_word[i].print(fout);
 	    }
 	  }
 	  fout<<endl;
@@ -298,7 +298,7 @@ int main(int argc, char** argv)
 	else {
 	  for ( int i = num_words - 1; i >= 0; i--) {
 	    if (list_word[i].get_field_name().compare("") != 0) {
-	      list_word[i].print();
+	      list_word[i].print(fout);
 	    }
 	  }
 	  fout<<endl;

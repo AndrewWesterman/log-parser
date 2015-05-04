@@ -24,7 +24,7 @@ class Word {
     string get_field_name();
 
     // Prints the word object to std out
-    void print();
+    void print(ostream&);
 };
 
 #endif

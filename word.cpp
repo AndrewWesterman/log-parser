@@ -150,6 +150,6 @@ string Word::get_field_name() {
     return field_name;
 }
 
-void Word::print() {
-  cout << "Line " << line_num << ": Word " << word_num << ": " << field_name << " = " << data_value  <<" "<< description << endl;
+void Word::print(ostream& stream) {
+  stream << "Line " << line_num << ": Word " << word_num << ": " << field_name << " = " << data_value  <<" "<< description << endl;
 }

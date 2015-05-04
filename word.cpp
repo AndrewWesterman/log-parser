@@ -21,117 +21,117 @@ void Word::set_values(int line_num, int word_num, string data) {
 
     switch (word_num) {
     case 0:
-        field_name = "Rec_Ctrl";
+        field_name = " Rec_Ctrl";
         data_value = bit_shift(data, 14, 13);
         assert(data_value >= 0);
         if (data_value == 0)
-            description = "(no recording)";
+            description = " (no recording)";
         else if (data_value == 2)
-            description = "(no processing)";
+            description = " (no processing)";
         else if (data_value == 3)
-            description = "(processing & recording";
+            description = " (processing & recording";
         else
-            description = "(unknown)";
+            description = " (unknown)";
         break;
     case 1:
-        field_name = "Cmd_Type";
+        field_name = " Cmd_Type";
         data_value = bit_shift(data, 15, 13);
         assert(data_value >= 0);
         if (data_value == 4)
-            description = "(Type A)";
+            description = " (Type A)";
         else if (data_value == 5)
-            description = "(Type B)";
+            description = " (Type B)";
         else if (data_value == 6)
-	  description = "(Type C)";
+	  description = " (Type C)";
         else
-            description = "(unknown)";
+            description = " (unknown)";
         break;
     case 4:
-        field_name = "Rec_Raw";
+        field_name = " Rec_Raw";
         data_value = bit_shift(data, 0, 0);
         assert(data_value >= 0);
         if (data_value == 0)
-            description = "(disable)";
+            description = " (disable)";
         else if (data_value == 1)
-            description = "(enable)";
+            description = " (enable)";
         else
-            description = "(unknown)";
+            description = " (unknown)";
         break;
     case 5:
-        field_name = "Cmd_ID";
+        field_name = " Cmd_ID";
         data_value = bit_shift(data, 6, 0);
         assert(data_value >= 0);
         description = "";
         break;
     case 10:
-        field_name = "Num_Responses";
+        field_name = " Num_Responses";
         data_value = bit_shift(data, 15, 11);
         assert(data_value >= 0);
         description = "";
         break;
     case 15:
-        field_name = "Reset_Enable";
+        field_name = " Reset_Enable";
         data_value = bit_shift(data, 2, 2);
         assert(data_value >= 0);
         if (data_value == 0)
-            description = "(disable)";
+            description = " (disable)";
         else if (data_value == 1)
-            description = "(enable)";
+            description = " (enable)";
         else
-            description = "(unknown)";
+            description = " (unknown)";
         break;
     case 22:
-        field_name = "Direction";
+        field_name = " Direction";
         data_value = bit_shift(data, 3, 3);
         assert(data_value >= 0);
         if (data_value == 0)
-            description = "(Right)";
+            description = " (Right)";
         else if (data_value == 1)
-            description = "(Left)";
+            description = " (Left)";
         else
-            description = "(unknown)";
+            description = " (unknown)";
         break;
     case 32:
-        field_name = "Num_Samples";
+        field_name = " Num_Samples";
         data_value = bit_shift(data, 14, 0);
         assert(data_value >= 0);
         description = "";
         break;
     case 37:
-        field_name = "Parity";
+        field_name = " Parity";
         data_value = bit_shift(data, 15, 15);
         assert(data_value >= 0);
         if (data_value == 0)
-            description = "(even)";
+            description = " (even)";
         else if (data_value == 1)
-            description = "(odd)";
+            description = " (odd)";
         else
-            description = "(unknown)";
+            description = " (unknown)";
         break;
     case 38:
-        field_name = "Test";
+        field_name = " Test";
         data_value = bit_shift(data, 14, 14);
         assert(data_value >= 0);
         if (data_value == 0)
-            description = "(disable)";
+            description = " (disable)";
         else if (data_value == 1)
-            description = "(enable)";
+            description = " (enable)";
         else
-            description = "(unknown)";
+            description = " (unknown)";
         break;
     case 40:
-        field_name = "Ctrl_Enable";
+        field_name = " Ctrl_Enable";
         data_value = bit_shift(data, 7, 7);
         assert(data_value >= 0);
         if (data_value == 0)
-            description = "(disable)";
+            description = " (disable)";
         else if (data_value == 1)
-            description = "(enable)";
+            description = " (enable)";
         else
-            description = "(unknown)";
+            description = " (unknown)";
         break;
     case 41:
-        field_name = "Code";
+        field_name = " Code";
         data_value = bit_shift(data, 14, 8);
         assert(data_value >= 0);
         description = "";
@@ -151,5 +151,5 @@ string Word::get_field_name() {
 }
 
 void Word::print(ostream& stream) {
-  stream << "Line " << line_num << ": Word " << word_num << ": " << field_name << " = " << data_value  <<" "<< description << endl;
+  stream << "Line " << line_num << ": Word " << word_num << ":" << field_name << " = " << data_value  << description << endl;
 }

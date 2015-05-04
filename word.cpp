@@ -108,7 +108,7 @@ void Word::set_values(int line_num, int word_num, string data) {
         else
             description = "(unknown)";
         break;
-    case 39:
+    case 38:
         field_name = "Test";
         data_value = bit_shift(data, 14, 14);
         assert(data_value >= 0);

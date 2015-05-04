@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <stdlib.h>
 #include <iomanip>
 #include <fstream>
 #include "rate.h"

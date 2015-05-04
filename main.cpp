@@ -37,7 +37,7 @@ int main(int argc, char** argv)
   int line_num = 0;
   int num_words;
   string line;
-  string* data;
+  string data;
   int index;
   int index_reverse;
   bool order = false;
@@ -85,25 +85,25 @@ int main(int argc, char** argv)
 
     /* If the previous line was a command, then set the time using the data from Command_Info.get_time() */
     if ( previous_command ) {
-      previous_command->set_time(*Command_Info.get_time());
+      previous_command->set_time(Command_Info.get_time());
       RelTime.set_flag("No");  /* Set all the flags to false */
     }
 
     
     
     /* Check if it's is S to D command by comparing the address with command_S_to_D which is "40000810" */
-    if ( Command_Info.get_address()->compare(command_S_to_D) == 0 ) {
+    if ( Command_Info.get_address().compare(command_S_to_D) == 0 ) {
       
       /* Using the information in Command_Info to set values to object command */
-      command->set_values(line_num, "S-to-D", *Command_Info.get_kind(), *Command_Info.get_data());
+      command->set_values(line_num, "S-to-D", Command_Info.get_kind(), Command_Info.get_data());
 
       /* Set the flag to indicate that this is a S to D command */
-      if ( Command_Info.get_kind()->compare("Wr") == 0 ) RelTime.set_flag("S_D_Wr");
+      if ( Command_Info.get_kind().compare("Wr") == 0 ) RelTime.set_flag("S_D_Wr");
       else RelTime.set_flag("S_D_Rd");
 							  
 	   
       /* Print information of the command by calling function print() */
-      command->print(outFile);
+      command->print();
       num_words = command->get_num_of_words();   /* Get the number of words of the command */
       
       /* If the number of words of the command is not 0, then process next lines to get information of each word */
@@ -115,21 +115,21 @@ int main(int argc, char** argv)
 	/* Check the flag to set the time for this command */
 
 	previous_command = RelTime.check_flag();
-	previous_command->set_time(*Word_Info.get_time());
+	previous_command->set_time(Word_Info.get_time());
 
 	/* Compare the address of this line to "40000818".
 	   If they are the same, it means that the words start from word 0 to N */
-	if ( Word_Info.get_address()->compare(data1) == 0 ) {
+	if ( Word_Info.get_address().compare(data1) == 0 ) {
 	  order = true;
 	  index = 0;
 	  data = Word_Info.get_data();    
 	  
 	  /* If the size of data is D32, it means the data contains two words 
 	     Use information in Word_Info to set values for word 0 and 1 */
-	  if (Word_Info.get_size()->compare("D32") == 0) {
-	    list_word[index].set_values(line_num, index, data->substr(0, 4));
+	  if (Word_Info.get_size().compare("D32") == 0) {
+	    list_word[index].set_values(line_num, index, data.substr(0, 4));
 	    ++index;
-	    list_word[index].set_values(line_num, index,  data->substr(4, 4));
+	    list_word[index].set_values(line_num, index,  data.substr(4, 4));
 	    ++index;
 	  }
 	  
@@ -141,14 +141,14 @@ int main(int argc, char** argv)
 	    Word_Info.parse_line(line);
 
 	    /* set the time */
-	    previous_command->set_time(*Word_Info.get_time());
+	    previous_command->set_time(Word_Info.get_time());
 
 	    /* set values for words */
 	    data = Word_Info.get_data();
-	    if (Word_Info.get_size()->compare("D32") == 0) {
-	      list_word[index].set_values(line_num, index, data->substr(0, 4));
+	    if (Word_Info.get_size().compare("D32") == 0) {
+	      list_word[index].set_values(line_num, index, data.substr(0, 4));
 	      ++index;
-	      list_word[index].set_values(line_num, index, data->substr(4, 4));
+	      list_word[index].set_values(line_num, index, data.substr(4, 4));
 	      ++index;
 	    }
 	  }
@@ -159,10 +159,10 @@ int main(int argc, char** argv)
 	  order = false;
 	  index_reverse = num_words - 1;        /* This is the index of word N */
 	  data = Word_Info.get_data();
-	  if (Word_Info.get_size()->compare("D32") == 0) {
-	    list_word[index_reverse].set_values(line_num, index_reverse, data->substr(4, 4));
+	  if (Word_Info.get_size().compare("D32") == 0) {
+	    list_word[index_reverse].set_values(line_num, index_reverse, data.substr(4, 4));
 	    --index_reverse;
-	    list_word[index_reverse].set_values(line_num, index_reverse, data->substr(0, 4));
+	    list_word[index_reverse].set_values(line_num, index_reverse,  data.substr(0, 4));
 	    --index_reverse;
 	  }
 	  while(index_reverse >= 0){
@@ -171,13 +171,13 @@ int main(int argc, char** argv)
 	    Word_Info.parse_line(line);
 
 	    /* set the time */
-	    previous_command->set_time(*Word_Info.get_time());
+	    previous_command->set_time(Word_Info.get_time());
 
 	    data = Word_Info.get_data();
-	    if (Word_Info.get_size()->compare("D32") == 0) {
-	      list_word[index_reverse].set_values(line_num, index_reverse, data->substr(4, 4));
+	    if (Word_Info.get_size().compare("D32") == 0) {
+	      list_word[index_reverse].set_values(line_num, index_reverse, data.substr(4, 4));
 	      --index_reverse;
-	      list_word[index_reverse].set_values(line_num, index_reverse, data->substr(0, 4));
+	      list_word[index_reverse].set_values(line_num, index_reverse,  data.substr(0, 4));
 	      --index_reverse;
 	    }
 	  }
@@ -190,7 +190,7 @@ int main(int argc, char** argv)
 	      list_word[i].print();
 	    }
 	  }
-	  outFile<<endl;
+	  cout<<endl;
 	}
 	
 	/*Print words in the the descending order */
@@ -200,22 +200,22 @@ int main(int argc, char** argv)
 	      list_word[i].print();
 	    }
 	  }
-	  outFile<<endl;
+	  cout<<endl;
 	}
         
-      } else outFile<<endl; 
+      } else cout<<endl; 
        
     }
    
 
     /* Check if it's D to S command */
-    else if ( Command_Info.get_address()->compare(command_D_to_S) == 0 ) {
-      command->set_values(line_num, "D-to-S", *Command_Info.get_kind(), *Command_Info.get_data());
+    else if ( Command_Info.get_address().compare(command_D_to_S) == 0 ) {
+      command->set_values(line_num, "D-to-S", Command_Info.get_kind(), Command_Info.get_data());
       
-      command->print(outFile);
+      command->print();
 
       /* Set the flag to indicate that this is a S to D command */
-      if ( Command_Info.get_kind()->compare("Wr") == 0 ) RelTime.set_flag("D_S_Wr");
+      if ( Command_Info.get_kind().compare("Wr") == 0 ) RelTime.set_flag("D_S_Wr");
       else RelTime.set_flag("D_S_Rd");
       
       num_words = command->get_num_of_words();
@@ -226,16 +226,16 @@ int main(int argc, char** argv)
 
 	/* Check the flag to set the time for this command */
 	previous_command = RelTime.check_flag();
-	previous_command->set_time(*Word_Info.get_time());
+	previous_command->set_time(Word_Info.get_time());
 
-	if ( Word_Info.get_address()->compare(data3) == 0 ) {
+	if ( Word_Info.get_address().compare(data3) == 0 ) {
 	  order = true;
 	  index = 0;
 	  data = Word_Info.get_data();
-	  if (Word_Info.get_size()->compare("D32") == 0) {
-	    list_word[index].set_values(line_num, index, data->substr(0, 4));
+	  if (Word_Info.get_size().compare("D32") == 0) {
+	    list_word[index].set_values(line_num, index, data.substr(0, 4));
 	    ++index;
-	    list_word[index].set_values(line_num, index, data->substr(4, 4));
+	    list_word[index].set_values(line_num, index,  data.substr(4, 4));
 	    ++index;
 	  }
 	  
@@ -245,13 +245,13 @@ int main(int argc, char** argv)
 	    Word_Info.parse_line(line);
 
 	    /* Set the time */
-	    previous_command->set_time(*Word_Info.get_time());
+	    previous_command->set_time(Word_Info.get_time());
 	    
 	    data = Word_Info.get_data();
-	    if (Word_Info.get_size()->compare("D32") == 0) {
-	      list_word[index].set_values(line_num, index, data->substr(0, 4));
+	    if (Word_Info.get_size().compare("D32") == 0) {
+	      list_word[index].set_values(line_num, index, data.substr(0, 4));
 	      ++index;
-	      list_word[index].set_values(line_num, index, data->substr(4, 4));
+	      list_word[index].set_values(line_num, index,  data.substr(4, 4));
 	      ++index;
 	    }
 	  }
@@ -260,10 +260,10 @@ int main(int argc, char** argv)
 	  order = false;
 	  index_reverse = num_words - 1;
 	  data = Word_Info.get_data();
-	  if (Word_Info.get_size()->compare("D32") == 0) {
-	    list_word[index_reverse].set_values(line_num, index_reverse, data->substr(4, 4));
+	  if (Word_Info.get_size().compare("D32") == 0) {
+	    list_word[index_reverse].set_values(line_num, index_reverse, data.substr(4, 4));
 	    --index_reverse;
-	    list_word[index_reverse].set_values(line_num, index_reverse, data->substr(0, 4));
+	    list_word[index_reverse].set_values(line_num, index_reverse,  data.substr(0, 4));
 	    --index_reverse;
 	  }
 	  while(index_reverse >= 0){
@@ -272,13 +272,13 @@ int main(int argc, char** argv)
 	    Word_Info.parse_line(line);
 
 	    /* Set the time */
-	    previous_command->set_time(*Word_Info.get_time());
+	    previous_command->set_time(Word_Info.get_time());
 	    
 	    data = Word_Info.get_data();
-	    if (Word_Info.get_size()->compare("D32") == 0) {
-	      list_word[index_reverse].set_values(line_num, index_reverse, data->substr(4, 4));
+	    if (Word_Info.get_size().compare("D32") == 0) {
+	      list_word[index_reverse].set_values(line_num, index_reverse, data.substr(4, 4));
 	      --index_reverse;
-	      list_word[index_reverse].set_values(line_num, index_reverse, data->substr(0, 4));
+	      list_word[index_reverse].set_values(line_num, index_reverse,  data.substr(0, 4));
 	      --index_reverse;
 	    }
 	  }
@@ -291,7 +291,7 @@ int main(int argc, char** argv)
 	      list_word[i].print();
 	    }
 	  }
-	  outFile<<endl;
+	  cout<<endl;
 	}
 	else {
 	  for ( int i = num_words - 1; i >= 0; i--) {
@@ -299,17 +299,17 @@ int main(int argc, char** argv)
 	      list_word[i].print();
 	    }
 	  }
-	  outFile<<endl;
+	  cout<<endl;
 	}
 	
-      } else outFile<<endl; 
+      } else cout<<endl; 
      
       }
   }
 
   inFile.close();
 
-  RelTime.print();
+  //RelTime.print(outFile);
   	
   delete [] list_word;
   delete command;

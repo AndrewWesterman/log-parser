@@ -19,8 +19,10 @@ void Rate::set_name(string name){
 void Rate::set_time( string current_time){
   string type;
   type = current_time.substr(current_time.length() - 2, 2);
+  
   double current_time_d;
-  current_time_d = stod(current_time.substr(0, current_time.length() - 2));
+  current_time = current_time.substr(0, current_time.length() - 2);
+  current_time_d = atof(current_time.c_str());  // Convert current_time to double
  
   if (type.compare("ns") == 0 ) current_time_d = current_time_d/1000000000;
   else if (type.compare("us") == 0 ) current_time_d = current_time_d/1000000;

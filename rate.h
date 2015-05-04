@@ -8,7 +8,7 @@ using namespace std;
 const unsigned int  KILOBITS = 1000;
 const unsigned int MEGABITS = 1000000;
 const unsigned long GIGABITS = 1000000000;
-const unsigned long TERABITS = 1000000000000;
+const unsigned long long TERABITS = 1000000000000;
 
 class Rate {
   string name;

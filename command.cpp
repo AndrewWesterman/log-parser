@@ -47,9 +47,9 @@ void Command::set_values(int line_num, string name, string kind, string num)
     this->num_words = num_words / 2;
 }
 //output line#/type/name/#words
-void Command::print() const
+void Command::print(ostream& stream) const
 {
-    cout << "Line " << line_num << ": " << type << " " << name
+    stream << "Line " << line_num << ": " << type << " " << name
          << " command: " << num_words << " words" << endl;
 }
 

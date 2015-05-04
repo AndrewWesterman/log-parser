@@ -50,6 +50,8 @@ int main(int argc, char** argv)
     exit(2);
   }
   
+  /* open results.log to write log */
+  ofstream fout("results.log");
 
   /* Create two objects of class Data_Info to get useful data from input file */
   Data_Info Command_Info;
@@ -103,7 +105,7 @@ int main(int argc, char** argv)
 							  
 	   
       /* Print information of the command by calling function print() */
-      command->print();
+      command->print(fout);
       num_words = command->get_num_of_words();   /* Get the number of words of the command */
       
       /* If the number of words of the command is not 0, then process next lines to get information of each word */
@@ -190,7 +192,7 @@ int main(int argc, char** argv)
 	      list_word[i].print();
 	    }
 	  }
-	  cout<<endl;
+	  fout<<endl;
 	}
 	
 	/*Print words in the the descending order */
@@ -200,10 +202,10 @@ int main(int argc, char** argv)
 	      list_word[i].print();
 	    }
 	  }
-	  cout<<endl;
+	  fout<<endl;
 	}
         
-      } else cout<<endl; 
+      } else fout<<endl; 
        
     }
    
@@ -212,7 +214,7 @@ int main(int argc, char** argv)
     else if ( Command_Info.get_address().compare(command_D_to_S) == 0 ) {
       command->set_values(line_num, "D-to-S", Command_Info.get_kind(), Command_Info.get_data());
       
-      command->print();
+      command->print(fout);
 
       /* Set the flag to indicate that this is a S to D command */
       if ( Command_Info.get_kind().compare("Wr") == 0 ) RelTime.set_flag("D_S_Wr");
@@ -291,7 +293,7 @@ int main(int argc, char** argv)
 	      list_word[i].print();
 	    }
 	  }
-	  cout<<endl;
+	  fout<<endl;
 	}
 	else {
 	  for ( int i = num_words - 1; i >= 0; i--) {
@@ -299,10 +301,10 @@ int main(int argc, char** argv)
 	      list_word[i].print();
 	    }
 	  }
-	  cout<<endl;
+	  fout<<endl;
 	}
 	
-      } else cout<<endl; 
+      } else fout<<endl; 
      
       }
   }

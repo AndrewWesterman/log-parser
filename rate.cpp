@@ -7,16 +7,21 @@
 
 using namespace std;
 
+//--------------------------------------------------------------
 Rate::Rate(){
   name = "";
   total_time = 0.0;
   count = 0;
 }
+//--------------------------------------------------------------
 
+//--------------------------------------------------------------
 void Rate::set_name(string name){
   this->name = name;
 }
+//--------------------------------------------------------------
 
+//--------------------------------------------------------------------------------
 void Rate::set_time( string current_time){
   string type;
   type = current_time.substr(current_time.length() - 2, 2);
@@ -33,9 +38,11 @@ void Rate::set_time( string current_time){
   this->total_time += current_time_d;
   this->count += 32;
 }
+//--------------------------------------------------------------------------------
 
+//--------------------------------------------------------------------------------
 void Rate::print(ofstream& outFile){
-  
+
   double rate;
   rate = count/total_time;
   if (rate > TERABITS){
@@ -56,3 +63,4 @@ void Rate::print(ofstream& outFile){
   }
 
 }
+//-----------------------------------------------------------------------------------

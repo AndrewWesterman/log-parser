@@ -9,7 +9,7 @@
 using namespace std;
 
 
-// Pass in the string
+//---------------Pass in the string-----------------------------------------
 string hex_to_bin(string s) {
     stringstream hex_to_bin;
     int n;
@@ -29,7 +29,9 @@ string hex_to_bin(string s) {
 
     return address_in_binary;
 }
+//--------------------------------------------------------------------------
 
+//-------------------------Bin to Dec---------------------------------------
 int bin_to_dec(string address_in_binary) {
     int dec;
     stringstream bin_to_dec;
@@ -39,12 +41,15 @@ int bin_to_dec(string address_in_binary) {
     return dec;
 }
 
+//------------------------Hex to Dec----------------------------------------
 int hex_to_dec(string s) {
     string address_in_bin = hex_to_bin(s);
     int address_in_dec = bin_to_dec(address_in_bin);
     return address_in_dec;
 }
+//-------------------------------------------------------------------------
 
+//-----------------------Bit Shift-------------------------------------------------
 int bit_shift(string data, int hiBound, int loBound) {
     int hexNum = hex_to_dec(data);
     int bitShift;
@@ -56,4 +61,4 @@ int bit_shift(string data, int hiBound, int loBound) {
     final = bitShift & bitMask;
     return final;
 }
-
+//--------------------------------------------------------------------------

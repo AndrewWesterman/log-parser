@@ -6,6 +6,7 @@
 
 using namespace std;
 
+//-----------------------------------------------------------------------------
 Time::Time(){
   S_D_Rd = false;
   S_D_Wr = false;
@@ -16,7 +17,9 @@ Time::Time(){
   rate[2].set_name("Read D-to-S command");
   rate[3].set_name("Write D-to-S command");
 }
+//-----------------------------------------------------------------------------
 
+//-----------------------------------------------------------------------------
 Rate* Time::check_flag(){
   if ( S_D_Rd ) return &rate[0];
   else if ( S_D_Wr ) return &rate[1];
@@ -24,7 +27,9 @@ Rate* Time::check_flag(){
   else if ( D_S_Wr ) return &rate[3];
   else return NULL;
 }
+//-----------------------------------------------------------------------------
 
+//-----------------------------------------------------------------------------
 void Time::set_flag(string flag){
   if (flag.compare("S_D_Rd") == 0 ) S_D_Rd = true;
   else if (flag.compare("S_D_Wr") == 0) S_D_Wr = true;
@@ -34,7 +39,10 @@ void Time::set_flag(string flag){
     S_D_Rd = S_D_Wr = D_S_Wr = D_S_Rd = false;
   }
 }
+//-----------------------------------------------------------------------------
 
+//-----------------------------------------------------------------------------
 void Time::print(ofstream& outFile) {
   for ( int i = 0; i < 4; i++ ) rate[i].print(outFile);
 }
+//-----------------------------------------------------------------------------

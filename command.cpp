@@ -5,7 +5,7 @@
 
 using namespace std;
 
-//set default values
+//----------------------------set default values------------------------------------------------
 Command::Command()
 {
     line_num = 0;
@@ -13,14 +13,16 @@ Command::Command()
     type = "";
     num_words = 0;
 }
+//----------------------------------------------------------------------------------------------
 
-//get number of words
+//---------------------------get number of words-------------------------------------------------
 int Command::get_num_of_words () const
 {
     return num_words;
 }
+//-----------------------------------------------------------------------------------------------
 
-//set the values
+//-------------------------------set the values-------------------------------------------------
 void Command::set_values(int line_num, string name, string kind, string num)
 {
     //retrieve line number
@@ -46,10 +48,12 @@ void Command::set_values(int line_num, string name, string kind, string num)
     //retrieve num_words divided by 2
     this->num_words = num_words / 2;
 }
-//output line#/type/name/#words
+//------------------------------------------------------------------------------------------------
+
+//-----------------output line#/type/name/#words-------------------------------------------------
 void Command::print(ostream& stream) const
 {
     stream << "Line " << line_num << ": " << type << " " << name
          << " command: " << num_words << " words" << endl;
 }
-
+//-----------------------------------------------------------------------------------------------

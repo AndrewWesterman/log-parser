@@ -47,5 +47,5 @@ main.exe: main.o parse.o command.o word.o rate.o time.o convert.o
 #--------------Clean object files and main.exe-----------------------------------
 clean: 
 	rm *.o *~ main.exe results.log
-
+#--------------------------------------------------------------------------------
 

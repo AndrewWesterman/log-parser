@@ -8,7 +8,6 @@
 #include <fstream>
 #include <stdlib.h>
 #include <fstream>
-#include "convert.h"
 #include "parse.h"
 #include "command.h"
 #include "word.h"
@@ -21,11 +20,15 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-  /* Sanity check */
+  //-------------Sanity check--------------------------
   if ( argc != 2 ) {
     cerr << "Usage: "<<argv[0]<<" <input file> "<<endl;
     exit(1);
   }
+  //---------------------------------------------------
+
+  
+  //--------Declared Variables, Const, Bool--------------
   const string command_S_to_D = "40000810";
   const string command_D_to_S = "40000C18";
   string data1 = "40000818";
@@ -41,22 +44,29 @@ int main(int argc, char** argv)
   int index;
   int index_reverse;
   bool order = false;
-  
-  /* Open the file to read */
+  //-----------------------------------------------------
+
+
+  //------------Open the file to read--------------------
   ifstream inFile;
   inFile.open(argv[1]);
   if ( ! inFile.is_open()) {
     cerr << "Cannot open the input file."<<endl;
     exit(2);
   }
+  //-----------------------------------------------------
+
   
-  /* open results.log to write log */
+  //----------open results.log to write log--------------
   ofstream fout("results.log");
   if ( ! fout.is_open()) {
     cerr << "Cannot open the output file."<<endl;
     exit(3);
   }
+  //-----------------------------------------------------
 
+
+  //-------------------------------------------------------------------------------------------------------------------------
   /* Create two objects of class Data_Info to get useful data from input file */
   Data_Info Command_Info;
   Data_Info Word_Info;
@@ -73,11 +83,15 @@ int main(int argc, char** argv)
 
   /* Create a pointer to hold the address of an object of class Rate to set the values for each types of commands */
   Rate* previous_command;
-  
+  //-------------------------------------------------------------------------------------------------------------------------
+
+  //===========================================================================================================================
   /* Read input file line by line from the beginning to end 
      Each line is copied into the string line */
-
+  
   while( getline(inFile, line)){
+
+    //-----------------------------------------------------------------------------------------------------------------
     ++line_num;     /* increase line number by one each time a new line is read */
 
     /* Call function parse_line to parse data of the line. Now useful data is in Command_Info */
@@ -88,15 +102,20 @@ int main(int argc, char** argv)
        will return NULL */
 
     previous_command = RelTime.check_flag();
+    //------------------------------------------------------------------------------------------------------------------
 
+
+    //------------------------------------------------------------------------------------------------------------------
     /* If the previous line was a command, then set the time using the data from Command_Info.get_time() */
     if ( previous_command ) {
       previous_command->set_time(Command_Info.get_time());
       RelTime.set_flag("No");  /* Set all the flags to false */
     }
+    //------------------------------------------------------------------------------------------------------------------
+    
 
-    
-    
+
+    //------------------------------------------------------------------------------------------------------------------
     /* Check if it's is S to D command by comparing the address with command_S_to_D which is "40000810" */
     if ( Command_Info.get_address().compare(command_S_to_D) == 0 ) {
       
@@ -106,8 +125,7 @@ int main(int argc, char** argv)
       /* Set the flag to indicate that this is a S to D command */
       if ( Command_Info.get_kind().compare("Wr") == 0 ) RelTime.set_flag("S_D_Wr");
       else RelTime.set_flag("S_D_Rd");
-							  
-	   
+								  	   
       /* Print information of the command by calling function print() */
       command->print(fout);
       num_words = command->get_num_of_words();   /* Get the number of words of the command */
@@ -212,8 +230,10 @@ int main(int argc, char** argv)
       } else fout<<endl; 
        
     }
-   
+   //------------------------------------------------------------------------------------------------------------------
 
+
+   //------------------------------------------------------------------------------------------------------------------
     /* Check if it's D to S command */
     else if ( Command_Info.get_address().compare(command_D_to_S) == 0 ) {
       command->set_values(line_num, "D-to-S", Command_Info.get_kind(), Command_Info.get_data());
@@ -311,8 +331,10 @@ int main(int argc, char** argv)
       } else fout<<endl; 
      
       }
-  }
+    //------------------------------------------------------------------------------------------------------------------
 
+  }
+  //===========================================================================================================================
   inFile.close();
 
   RelTime.print(fout);

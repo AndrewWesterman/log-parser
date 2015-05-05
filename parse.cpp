@@ -7,7 +7,7 @@
 
 using namespace std;
 
-//Empty values for parsed elements
+//-----------------Empty values for parsed elements----------------------
 Data_Info::Data_Info() {
     address = "";
     data = "";
@@ -15,8 +15,9 @@ Data_Info::Data_Info() {
     kind = "";
     time = "";
 }
+//-----------------------------------------------------------------------
 
-//Retrieve values from line
+//-----------------Retrieve values from line-----------------------------
 void Data_Info::parse_line(string a) {
     stringstream ss;
     string not_useful;
@@ -48,30 +49,35 @@ void Data_Info::parse_line(string a) {
     this->kind = kind;
     this->time = time;
 }
+//-------------------------------------------------------------------------
 
-//Get address
+//------------------Get address--------------------------------------------
 string Data_Info::get_address() {
     return address;
 }
+//-------------------------------------------------------------------------
 
-//Get data
+//------------------Get data-----------------------------------------------
 string Data_Info::get_data() {
     return data;
 }
+//-------------------------------------------------------------------------
 
-//Get size
+//------------------Get size-----------------------------------------------
 string Data_Info::get_size() {
     return size;
 }
+//--------------------------------------------------------------------------
 
-//Get kind
+//----------------------Get kind--------------------------------------------
 string Data_Info::get_kind() {
     return kind;
 }
+//--------------------------------------------------------------------------
 
-//Get time
+//-----------------------Get time-------------------------------------------
 string Data_Info::get_time() {
     return time;
 }
-
+//--------------------------------------------------------------------------
 
